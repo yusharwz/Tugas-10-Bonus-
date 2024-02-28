@@ -1,0 +1,66 @@
+<?php
+require_once 'koneksi.php';
+
+$id = $_GET["id"] ?? "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
+    $nama_produk = $_POST["nama_produk"];
+    $keterangan = $_POST["keterangan"];
+    $harga = $_POST["harga"];
+    $jumlah = $_POST["jumlah"];
+
+    $sql = "UPDATE produk SET nama_produk=?, keterangan=?, harga=?, jumlah=? WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssiii", $nama_produk, $keterangan, $harga, $jumlah, $id);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+    header("Location: index.php");
+    exit;
+} else {
+    $sql = "SELECT * FROM produk WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubah Produk</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-5">Ubah Produk</h1>
+        <form method="post">
+            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+            <div class="form-group">
+                <label for="nama_produk">Nama Produk:</label>
+                <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<?php echo $data['nama_produk']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="keterangan">Keterangan:</label>
+                <textarea class="form-control" id="keterangan" name="keterangan" required><?php echo $data['keterangan']; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga:</label>
+                <input type="number" class="form-control" id="harga" name="harga" value="<?php echo $data['harga']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="jumlah">Jumlah:</label>
+                <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?php echo $data['jumlah']; ?>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ubah</button>
+        </form>
+    </div>
+</body>
+</html>

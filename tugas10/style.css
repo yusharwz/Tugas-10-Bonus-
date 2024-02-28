@@ -1,0 +1,19 @@
+body {
+    background-image: url('bali.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;   
+}
+
+.container {
+    background: #ffffffd1;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.pijar {
+    float: right;
+    margin: 1px;
+    height: 165px;
+}
