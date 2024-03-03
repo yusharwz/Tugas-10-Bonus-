@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
+        <img class="pijar" src="PijarCamp.png" />
         <h1 class="my-5">Ubah Produk</h1>
         <form method="post">
             <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
