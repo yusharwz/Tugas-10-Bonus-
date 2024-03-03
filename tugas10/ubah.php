@@ -1,7 +1,7 @@
 <?php
 require_once 'koneksi.php';
 
-$id = $_GET["id"] ?? "";
+$id = $_GET["id"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
@@ -10,23 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $harga = $_POST["harga"];
     $jumlah = $_POST["jumlah"];
 
-    $sql = "UPDATE produk SET nama_produk=?, keterangan=?, harga=?, jumlah=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssiii", $nama_produk, $keterangan, $harga, $jumlah, $id);
-    $stmt->execute();
-
-    $stmt->close();
-    $conn->close();
-
+    mysqli_query($conn, "UPDATE produk SET nama_produk='$nama_produk', keterangan='$keterangan', harga='$harga', jumlah='$jumlah' WHERE id='$id'");
     header("Location: index.php");
     exit;
 } else {
-    $sql = "SELECT * FROM produk WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result->fetch_assoc();
+    $sql = mysqli_query ($conn,"SELECT * FROM produk WHERE id='$id'");
+    $data = $sql->fetch_assoc();
 }
 ?>
 
