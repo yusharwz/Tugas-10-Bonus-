@@ -1,12 +1,9 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "pijarcamp";
+<?php 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli ("localhost","root","","pijarcamp");
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+if (mysqli_connect_error()){
+	echo "koneksi gagal" .mysqli_connect_error();
 }
+
 ?>
