@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
+        <img class="pijar" src="PijarCamp.png" />
         <h1 class="my-5">Tambah Produk Baru</h1>
         <form method="post">
             <div class="form-group">
