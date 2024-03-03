@@ -7,14 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $harga = $_POST["harga"];
     $jumlah = $_POST["jumlah"];
 
-    $sql = "INSERT INTO produk (nama_produk, keterangan, harga, jumlah) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssii", $nama_produk, $keterangan, $harga, $jumlah);
-    $stmt->execute();
-
-    $stmt->close();
-    $conn->close();
-
+    mysqli_query($conn,"INSERT INTO produk(nama_produk,keterangan,harga,jumlah)
+            VALUES ('$nama_produk','$keterangan','$harga','$jumlah')");
     header("Location: index.php");
     exit;
 }
