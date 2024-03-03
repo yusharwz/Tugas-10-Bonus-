@@ -22,7 +22,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Nama Produk</th>
                     <th scope="col">Keterangan</th>
                     <th scope="col">Harga</th>
@@ -33,11 +33,12 @@
             <tbody>
                 <?php
                 $sql = mysqli_query ($conn , "SELECT * FROM produk");
+                $no_urut = 1;
 
                 if ($sql->num_rows > 0) {
                     while ($row = $sql->fetch_assoc()) {
                         echo "<tr>
-                                <th scope='row'>{$row['id']}</th>
+                                <th>$no_urut</th>
                                 <td>{$row['nama_produk']}</td>
                                 <td>{$row['keterangan']}</td>
                                 <td>{$row['harga']}</td>
@@ -47,6 +48,7 @@
                                     <a href='hapus.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Apakah Anda yakin ingin menghapus produk ini?\")'>Hapus</a>
                                 </td>
                               </tr>";
+                        $no_urut++;
                     }
                 } else {
                     echo "<tr><td colspan='6'>Tidak ada produk yang ditemukan</td></tr>";
