@@ -32,11 +32,10 @@
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM produk";
-                $result = $conn->query($sql);
+                $sql = mysqli_query ($conn , "SELECT * FROM produk");
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                if ($sql->num_rows > 0) {
+                    while ($row = $sql->fetch_assoc()) {
                         echo "<tr>
                                 <th scope='row'>{$row['id']}</th>
                                 <td>{$row['nama_produk']}</td>
